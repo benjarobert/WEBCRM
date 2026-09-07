@@ -22,16 +22,14 @@
 <meta name="twitter:title" content="AutoCRM — El CRM para concesionarias de usados" />
 <meta name="twitter:description" content="Embudo de leads, inventario, vidriera pública con QR por auto y dashboard en vivo." />
 
-<!-- Fuentes: carga async + display=optional para eliminar CLS.
+<!-- Fuentes: async + display=optional para eliminar CLS y render-blocking.
      - preconnect: abre TCP/TLS a fonts.gstatic.com antes de necesitarlo
-     - preload as=style: descarga el CSS de fuentes en paralelo con el HTML
-     - onload swap: aplica el <link> como stylesheet DESPUÉS del paint inicial
-     - display=optional: si la fuente no llega en 100ms se queda la fallback
-       (elimina el "flash of unstyled text" que dispara el CLS 0.256)
-     - Menos pesos: solo los que realmente usamos above-the-fold. -->
+     - media="print" + onload→all: carga la hoja SIN bloquear el render
+     - display=optional: si la fuente no llega en ~100ms se queda la fallback
+       (elimina el layout shift que disparaba CLS 0.256)
+     - Menos pesos: solo los que realmente usamos. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,600i&family=Archivo:wght@400;600;700&family=JetBrains+Mono:wght@400&display=optional">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,600i&family=Archivo:wght@400;600;700&family=JetBrains+Mono:wght@400&display=optional" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,600i&family=Archivo:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap"></noscript>
 
@@ -247,7 +245,7 @@
     display:grid;place-items:center;color:#3E3A33;
   }
   .phone-body{padding:14px}
-  .phone-body h4{font-family:var(--serif);font-size:17px;font-weight:600;margin-bottom:3px}
+  .phone-body h3{font-family:var(--serif);font-size:17px;font-weight:600;margin-bottom:3px}
   .phone-body .sub{color:var(--muted);font-size:11px;margin-bottom:10px}
   .phone-price{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--gold);margin-bottom:12px}
   .phone-btn{
@@ -275,7 +273,7 @@
     background:var(--surface);border:1px solid var(--line);color:var(--gold);
     font-family:var(--mono);font-size:12.5px;font-weight:500;display:grid;place-items:center;
   }
-  .steps h4{font-size:17px;font-weight:600;margin:5px 0 6px}
+  .steps h3{font-size:17px;font-weight:600;margin:5px 0 6px}
   .steps p{color:var(--muted);font-size:14.5px;margin:0}
   .aside{
     position:sticky;top:100px;padding:32px;background:var(--surface);
@@ -394,7 +392,7 @@
     font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
     color:var(--gold);margin-bottom:12px;
   }
-  .setup-step h4{font-size:15px;font-weight:600;margin-bottom:6px}
+  .setup-step h3{font-size:15px;font-weight:600;margin-bottom:6px}
   .setup-step p{color:var(--muted);font-size:13.5px;margin:0;line-height:1.55}
 
   /* ─── Banda de dato / cita ─── */
@@ -416,7 +414,7 @@
   .safe{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   .safe-item{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
   .safe-item .ico{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--gold-soft);color:var(--gold);margin-bottom:14px}
-  .safe-item h4{font-size:14.5px;font-weight:600;margin-bottom:6px}
+  .safe-item h3{font-size:14.5px;font-weight:600;margin-bottom:6px}
   .safe-item p{color:var(--muted);font-size:13px;margin:0;line-height:1.55}
 
   /* ─── CTA fijo en mobile (68% del trafico automotor es mobile) ─── */
@@ -659,7 +657,7 @@
             <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 17h14M6 17V9l2-4h8l2 4v8"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/></svg>
           </div>
           <div class="phone-body">
-            <h4>Fiat Cronos</h4>
+            <h3>Fiat Cronos</h3>
             <div class="sub">2024 · 5.000 km · Nafta</div>
             <div class="phone-price">ARS 18.500.000</div>
             <div class="phone-btn">Contactar por WhatsApp</div>
@@ -686,22 +684,22 @@
       <ol class="steps reveal">
         <li>
           <span class="n">01</span>
-          <h4>Entra la consulta</h4>
+          <h3>Entra la consulta</h3>
           <p>Alguien pregunta por Instagram, Facebook, WhatsApp, la web o se aparece en el local. Cargás el lead, elegís su canal y su temperatura, y queda asignado a un vendedor —por defecto, el que lo cargó.</p>
         </li>
         <li>
           <span class="n">02</span>
-          <h4>Se le manda el auto</h4>
+          <h3>Se le manda el auto</h3>
           <p>Abrís la ficha de la unidad, mostrás el QR o copiás el link. El cliente ve fotos, ficha técnica y precio en su celular, sin registrarse.</p>
         </li>
         <li>
           <span class="n">03</span>
-          <h4>Avanza en el embudo</h4>
+          <h3>Avanza en el embudo</h3>
           <p>Arrastrás la tarjeta de Nuevo a Contactado, a En negociación, a Visita agendada. Anotás el monto que ofreció y las notas de cada charla.</p>
         </li>
         <li>
           <span class="n">04</span>
-          <h4>Se cierra la venta</h4>
+          <h3>Se cierra la venta</h3>
           <p>Movés el lead a Cierre y marcás el auto como vendido: sale de la vidriera pública, queda registrado en el historial de la unidad y el dashboard le suma el cierre al vendedor.</p>
         </li>
       </ol>
@@ -870,22 +868,22 @@
     <div class="setup">
       <div class="setup-step reveal">
         <div class="d">Día 1</div>
-        <h4>Demo y decisión</h4>
+        <h3>Demo y decisión</h3>
         <p>Te mostramos el sistema con autos tuyos cargados. Si no te convence, quedamos como amigos.</p>
       </div>
       <div class="setup-step reveal">
         <div class="d">Días 2 y 3</div>
-        <h4>Cargamos tu stock</h4>
+        <h3>Cargamos tu stock</h3>
         <p>Nos pasás la planilla de Excel o Sheets y subimos el inventario nosotros. Vos revisás y corregís.</p>
       </div>
       <div class="setup-step reveal">
         <div class="d">Día 4</div>
-        <h4>Damos de alta al equipo</h4>
+        <h3>Damos de alta al equipo</h3>
         <p>Creamos los usuarios con su rol —admin, gerente o vendedor— y hacemos una capacitación de 40 minutos.</p>
       </div>
       <div class="setup-step reveal">
         <div class="d">Día 5</div>
-        <h4>A vender</h4>
+        <h3>A vender</h3>
         <p>El equipo arranca a cargar leads. Nosotros seguimos disponibles las primeras semanas para lo que salga.</p>
       </div>
     </div>
@@ -905,21 +903,21 @@
         <span class="ico">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
         </span>
-        <h4>Cada uno ve lo suyo</h4>
+        <h3>Cada uno ve lo suyo</h3>
         <p>Los datos de tu concesionaria están separados de los de cualquier otra. Y adentro, cada rol accede solo a lo que le corresponde: el costo de compra no sale de la gerencia.</p>
       </div>
       <div class="safe-item reveal">
         <span class="ico">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         </span>
-        <h4>Te los llevás cuando quieras</h4>
+        <h3>Te los llevás cuando quieras</h3>
         <p>Si algún día decidís irte, te exportamos el inventario y los contactos en un archivo estándar. Sin trabas, sin demoras y sin letra chica.</p>
       </div>
       <div class="safe-item reveal">
         <span class="ico">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 3l8 4v5c0 4.4-3.4 8.3-8 9-4.6-.7-8-4.6-8-9V7l8-4z"/><path d="M9.5 12.5l1.8 1.8 3.4-3.6"/></svg>
         </span>
-        <h4>Respaldados y cifrados</h4>
+        <h3>Respaldados y cifrados</h3>
         <p>La información viaja cifrada y se guarda en infraestructura profesional con copias de seguridad automáticas. No vive en la computadora del local.</p>
       </div>
     </div>
