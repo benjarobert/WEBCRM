@@ -22,9 +22,18 @@
 <meta name="twitter:title" content="AutoCRM — El CRM para concesionarias de usados" />
 <meta name="twitter:description" content="Embudo de leads, inventario, vidriera pública con QR por auto y dashboard en vivo." />
 
+<!-- Fuentes: carga async + display=optional para eliminar CLS.
+     - preconnect: abre TCP/TLS a fonts.gstatic.com antes de necesitarlo
+     - preload as=style: descarga el CSS de fuentes en paralelo con el HTML
+     - onload swap: aplica el <link> como stylesheet DESPUÉS del paint inicial
+     - display=optional: si la fuente no llega en 100ms se queda la fallback
+       (elimina el "flash of unstyled text" que dispara el CLS 0.256)
+     - Menos pesos: solo los que realmente usamos above-the-fold. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,600i&family=Archivo:wght@400;600;700&family=JetBrains+Mono:wght@400&display=optional">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,600i&family=Archivo:wght@400;600;700&family=JetBrains+Mono:wght@400&display=optional" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,600i&family=Archivo:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap"></noscript>
 
 <style>
   /* ══════════════════════════════════════════════════════════════
@@ -337,7 +346,7 @@
   .foot-brand{max-width:280px}
   .foot-brand p{margin:12px 0 0;font-size:13px;line-height:1.6}
   .foot-cols{display:flex;gap:56px;flex-wrap:wrap}
-  .foot-col h5{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text);margin:0 0 12px;font-weight:500}
+  .foot-col h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text);margin:0 0 12px;font-weight:500}
   .foot-col a{display:block;padding:4px 0;transition:color .18s}
   .foot-col a:hover{color:var(--gold)}
   .foot-bottom{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--line);font-size:12px}
@@ -1028,7 +1037,7 @@
 
       <div class="foot-cols">
         <div class="foot-col">
-          <h5>Producto</h5>
+          <h3>Producto</h3>
           <a href="#producto">Qué incluye</a>
           <a href="#vidriera">Vidriera con QR</a>
           <a href="#comparar">Comparar</a>
@@ -1037,12 +1046,12 @@
           <a href="#faq">Preguntas</a>
         </div>
         <div class="foot-col">
-          <h5>Empresa</h5>
+          <h3>Empresa</h3>
           <a href="#demo">Pedir demo</a>
           <a href="#demo">Contacto</a>
         </div>
         <div class="foot-col">
-          <h5>Legal</h5>
+          <h3>Legal</h3>
           <!-- TODO: escribir estas dos páginas antes de publicar -->
           <a href="#">Términos de servicio</a>
           <a href="#">Política de privacidad</a>
