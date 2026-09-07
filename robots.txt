@@ -1,0 +1,8 @@
+# AutoCRM — Landing page
+# Permitir indexación completa a todos los crawlers
+
+User-agent: *
+Allow: /
+
+# Sitemap para que Google/Bing encuentren todas las páginas
+Sitemap: https://benjarobert.github.io/WEBCRM/sitemap.xml
